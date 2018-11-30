@@ -13,7 +13,7 @@ public class OrderContent {
 	
 	
 	public static void initOrderContent(int good_id){
-		goodMap.put(good_id,  goodMap.containsKey(good_id)? 1:(int)goodMap.get(good_id)+1 );
+		goodMap.put(good_id,  goodMap.containsKey(good_id)? goodMap.get(good_id)+1 : 1);
 	}
 		
 	

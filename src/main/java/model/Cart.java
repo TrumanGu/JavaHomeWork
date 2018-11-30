@@ -45,7 +45,7 @@ public class Cart {
 	public static void CheckOutByUID(int u_id,int m_id){
 		
 		//拿到购物车中的物品id
-		String sql1 = "SELECT * FROM cart_goods where cart_id=( SELECT c_id FROM cart WHERE u_id = "+ u_id+" )";
+		String sql1 = "SELECT * FROM cart_goods t1, cart t2 WHERE t2.c_id = t1.cart_id AND t2.m_id = "+m_id+" AND t2.u_id = "+u_id;
 		ResultSet rrs = JDBC.query(sql1);
 		try {
 			while(rrs.next()){
@@ -60,7 +60,7 @@ public class Cart {
 		//生成订单 并查询到id
 		Order.initOrder(u_id, m_id);
 		int order_id = 0;
-		ResultSet rrss = JDBC.query("SELECT order_id from `order` order by created_time desc limit 1");
+		ResultSet rrss = JDBC.query("SELECT order_id from `order` where u_id="+u_id+" and m_id="+m_id+";");
 		try {
 			rrss.next();
 			order_id = rrss.getInt("order_id");
@@ -78,7 +78,7 @@ public class Cart {
 		
 		// 删除购物车中的物品
 		String sql = "DELETE FROM cart_goods where cart_id=("
-				+ "	SELECT c_id FROM cart WHERE u_id = "+u_id+""
+				+ "	SELECT c_id FROM cart WHERE u_id = "+u_id+" and m_id="+m_id
 				+ ")";
 		int rs = JDBC.update(sql);	
 
@@ -89,15 +89,11 @@ public class Cart {
 	
 	
 	public static void main(String[] args){
-		try {
-			JDBC j = new JDBC();
+		JDBC j = new JDBC();
 
-			Cart m = Cart.getCartByUserID(1,1);
-			System.out.println(m.getC_id());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//			Cart m = Cart.getCartByUserID(1,1);
+		Cart.CheckOutByUID(1,2);
+//			System.out.println(m.getC_id());
 }
 
 

@@ -82,8 +82,8 @@ public class M_Detail {
 			public void mouseClicked(MouseEvent e) {
 				
 				// TODO:账户余额检查
-				Order.initOrder(u_id,m_id);
-				
+				Cart.CheckOutByUID(1,2);
+
 				//TODO：关闭当前窗口
 				frame.dispose();
 			}
