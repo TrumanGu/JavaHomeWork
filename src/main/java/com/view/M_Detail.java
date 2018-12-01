@@ -40,16 +40,18 @@ public class M_Detail {
 	public static void handleOrder(int u_id, int m_id){
 		JFrame frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setVisible(true);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(32, 203, 113, 27);
-		frame.getContentPane().add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(254, 203, 113, 27);
-		frame.getContentPane().add(btnNewButton_1);
+//		JButton btnNewButton = new JButton("New button");
+//		btnNewButton.setBounds(32, 203, 113, 27);
+//		frame.getContentPane().add(btnNewButton);
+//		
+//		JButton btnNewButton_1 = new JButton("New button");
+//		btnNewButton_1.setBounds(254, 203, 113, 27);
+//		frame.getContentPane().add(btnNewButton_1);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(53, 50, 379, 138);
@@ -77,12 +79,18 @@ public class M_Detail {
 		panel.add(new JLabel("确定要结帐吗？"));
 		JButton jb1 = new JButton("结帐");
 		JButton jb2 = new JButton("取消");
+		jb1.setBounds(32, 203, 113, 27);
+		jb2.setBounds(254, 203, 113, 27);
+
+		frame.getContentPane().add(jb1);
+		frame.getContentPane().add(jb2);
+
 		jb1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
 				// TODO:账户余额检查
-				Cart.CheckOutByUID(1,2);
+				Cart.CheckOutByUID(layout.u_id, m_id);
 
 				//TODO：关闭当前窗口
 				frame.dispose();

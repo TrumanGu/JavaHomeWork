@@ -29,7 +29,9 @@ public class Cart {
 				+ m_id
 				+ " AND t1.u_id = "
 				+ u_id
-				+ "AND t2.cart_id = t1.c_id AND t3.g_id = t2.good_id");
+				+ " AND t2.cart_id = t1.c_id AND t3.g_id = t2.good_id GROUP BY t3.g_name");
+
+		
 		Map<String, Integer> map = new HashMap<String,Integer>();
 		try {
 			while(rrss.next()){
@@ -79,9 +81,11 @@ public class Cart {
 		// 删除购物车中的物品
 		String sql = "DELETE FROM cart_goods where cart_id=("
 				+ "	SELECT c_id FROM cart WHERE u_id = "+u_id+" and m_id="+m_id
-				+ ")";
+				+ ");";
 		int rs = JDBC.update(sql);	
-
+		
+		System.out.println(sql);
+		OrderContent.goodMap.clear();
 	}
 	
 	

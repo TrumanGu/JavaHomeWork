@@ -54,6 +54,8 @@ public class User {
 	
 	
 	
+	
+	
 	public static void main(String[] args){
 		try {
 			JDBC j = new JDBC();
@@ -103,4 +105,5 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 }
